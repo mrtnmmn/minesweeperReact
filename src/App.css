@@ -40,6 +40,7 @@
   border-color: #00cfa3;
   color: #00cfa3;
   border-radius: 10%;
+  font-weight: bolder;
 }
 
 .buttonClicked {
@@ -50,6 +51,7 @@
   border-color: white;
   color: white;
   border-radius: 10%;
+  font-weight: bolder;
 }
 
 @keyframes App-logo-spin {
