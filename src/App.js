@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import Cell from './Components/Cell';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
     let fila = []
 
     for (let j = 0; j < 10; j++) {
-      fila.push("" + i + j)
+      fila.push(Cell)
     }
 
     matrix.push(fila)
@@ -24,17 +25,20 @@ function App() {
 
   function onClickFunction(index) {
     console.log(index)
-    setStateButton('buttonClicked')
   } 
+
+  
+
 
   return (
     <div className="App">
       <header className="App-header">
         <div className='divCont'>
-          {matrix.map((fila, indexFila) => {
+          <h1 className='uno'>Hola</h1>
+          {matrix.map((fila) => {
             return <div>{
-              fila.map((element, index)=> {
-                return <button key={indexFila * 10 +index} className={stateButton} onClick={() => onClickFunction(indexFila * 10 + index)}>{element}</button>
+              fila.map((element)=> {
+                return <Cell></Cell>
               })}
             </div> 
           })}
@@ -42,6 +46,24 @@ function App() {
       </header>
     </div>
   );
+
+    /*
+  return (
+    <div className="App">
+      <header className="App-header">
+        <div className='divCont'>
+          {matrix.map((fila, indexFila) => {
+            return <div>{
+              fila.map((element, index)=> {
+                return <button key={indexFila * 10 +index} className={stateButton} onClick={() => onClickFunction(indexFila * 10 + index)}></button>
+              })}
+            </div> 
+          })}
+        </div>
+      </header>
+    </div>
+  );
+  */
 }
 
 export default App;
