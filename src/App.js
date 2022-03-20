@@ -5,40 +5,60 @@ import Cell from './Components/Cell';
 
 function App() {
 
-  const [stateButton, setStateButton] = useState('buttons')
-
   let matrix = []
+  let rows = 8
+  let columns = 8
 
-  for (let i = 0; i < 10; i ++) {
-    let fila = []
+  for (let i = 0; i < rows; i ++) {
+    let row = []
 
-    for (let j = 0; j < 10; j++) {
-      fila.push(Cell)
+    for (let j = 0; j < columns; j++) {
+      row.push(1)
     }
-
-    matrix.push(fila)
-    console.log(fila)
-
+    matrix.push(row)
   }
 
+  let mines = [], pos = 0, i = 0, j = 0
+
+  while ( mines.length < 10) {
+
+    i = generateRandom(rows - 1, 0)
+    j = generateRandom(columns - 1, 0)
+
+    pos = (i + (j * 10 ))
+
+    if (mines.find(num => num === pos) === undefined) {
+      mines.push(pos)
+      console.log('j: ' + j)
+      matrix[j][i] = 9
+    }
+  }
+
+  console.log(mines)
   console.log(matrix)
 
-  function onClickFunction(index) {
-    console.log(index)
-  } 
+  function generateRandom(m, n) {
+    return Math.round(Math.random() * (m - n) + n)
+  }
 
-  
+  function fillMatrix() {
+    matrix[1][1] = 9
+    matrix[1][0] = 9
+    matrix[1][2] = 3
+  }
 
+  fillMatrix()
 
   return (
     <div className="App">
       <header className="App-header">
         <div className='divCont'>
-          <h1 className='uno'>Hola</h1>
-          {matrix.map((fila) => {
+          {matrix.map((row, indexRow) => {
+            console.log(row)
             return <div>{
-              fila.map((element)=> {
-                return <Cell></Cell>
+              row.map((col, indexCol)=> {
+                console.log(col)
+                return <Cell key={(indexRow * 10) + indexCol} num={col}></Cell>
               })}
             </div> 
           })}
@@ -46,24 +66,6 @@ function App() {
       </header>
     </div>
   );
-
-    /*
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div className='divCont'>
-          {matrix.map((fila, indexFila) => {
-            return <div>{
-              fila.map((element, index)=> {
-                return <button key={indexFila * 10 +index} className={stateButton} onClick={() => onClickFunction(indexFila * 10 + index)}></button>
-              })}
-            </div> 
-          })}
-        </div>
-      </header>
-    </div>
-  );
-  */
 }
 
 export default App;

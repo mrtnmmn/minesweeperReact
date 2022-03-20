@@ -52,13 +52,28 @@
   font-weight: bolder;
 }
 
-uno {
-  background-color: #ff9b00;
+.one {
   color: #00cfa3;
 }
 
-dos {
-  color: #ff9b00;
+.two {
+  color: #0059ff;
+}
+
+.three {
+  color: #ec00ff;
+}
+
+.four {
+  color: #a250ff;
+}
+
+.five {
+  color: #ff9b00
+}
+
+.six {
+  color:#ff1f00;
 }
 
 @keyframes App-logo-spin {
