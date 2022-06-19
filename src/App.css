@@ -40,6 +40,7 @@
   background-color: #00cfa3;
   border-radius: 10%;
   font-weight: bolder;
+  transition: 100ms;
 }
 
 .buttonClicked {
@@ -50,6 +51,10 @@
   border-color: white;
   border-radius: 10%;
   font-weight: bolder;
+}
+
+.unclicked {
+  color: #00cfa3;
 }
 
 .one {
@@ -74,6 +79,10 @@
 
 .six {
   color:#ff1f00;
+}
+
+.zero {
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {

@@ -1,20 +1,33 @@
 import '../App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Cell(props) {
 
     const n = props.num
+    const status = props.status 
 
-    const [stateButton, setStateButton] = useState('buttons')
+    const [stateButton, setStateButton] = useState('buttons unclicked')
     const [content, setContent] = useState('X')
     const [isClicked, setIsClicked] = useState(false)
+    const [buttonStatus, setButtonStatus] = useState(props.status)
 
-    function onClickFunction() {
+    useEffect(() => {
+        if (status === 1) {
+            setColor()
+            setIsClicked(true)
+            changeChangeContent()
+        }
+    }, [status])
+    
+    function changeChangeContent() {
         if (n === 9) {
-            setContent('B')   
+            setContent(<span>&#x1F4A3;</span>)   
         } else {
             setContent(n)
         }
+    }
+
+    function onClickFunction() {
         setColor()
         setIsClicked(true)
     }
@@ -40,13 +53,13 @@ function Cell(props) {
                 setStateButton('buttonClicked six')
                 break;
             default:
-                setStateButton('buttonClicked')
+                setStateButton('buttonClicked zero')
                 break;
         }
     }
 
     return ( 
-        <button disabled={isClicked} className={stateButton} onClick={onClickFunction}>{content}</button>
+        <button disabled={isClicked} className={stateButton} onClick={() => {props.buttonClick()}}>{content}</button>
     );
 }
 
