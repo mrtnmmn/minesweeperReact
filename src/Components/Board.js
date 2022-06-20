@@ -21,6 +21,7 @@ function Board(props) {
   const [firstClick, setFirstClick] = useState(false)
   const [hoveringCell, setHoveringCell] = useState([])
   const [auxHovering, setAuxHovering] = useState([])
+  const [flaggedCells, setFlaggedCells] = useState(0)
 
   useEffect(() => {
     resetAllButtons()
@@ -48,6 +49,7 @@ function Board(props) {
     document.addEventListener("contextmenu", prueba)
   })
 
+  /*
   useEffect(() => {
     console.log("Hovering Cell: ", hoveringCell)
     if (hoveringCell.length === 0) {
@@ -57,6 +59,7 @@ function Board(props) {
       document.addEventListener("contextmenu", prueba)
     }
   }, [hoveringCell])
+  */
 
   /*
     useEffect(() => {
@@ -79,8 +82,10 @@ function Board(props) {
     }, [hoveringCell])
     */
 
-  const handleRightClick = () => {
-    console.log("prueba")
+  const handleRightClick = (e, row, col) => {
+    e.preventDefault()
+    console.log('rightClicking: ' + row  + ', ' + col)
+    flagCell(row, col)
   }
 
   const prueba = () => {
@@ -126,8 +131,18 @@ function Board(props) {
   }
 
   function flagCell(row, col) {
+    console.log('flaging: ' + row + ', ' + col)
     let auxArray = buttonStatus
-    auxArray[row][col] = 2
+  
+    if (auxArray[row][col] === 2) {
+      auxArray[row][col] = 0
+      setFlaggedCells(flaggedCells - 1)
+    } else {
+      if (flaggedCells < mineQuantity) {
+        auxArray[row][col] = 2
+        setFlaggedCells(flaggedCells + 1)
+      }
+    }
     setButtonStatus([...auxArray])
   }
 
@@ -142,15 +157,8 @@ function Board(props) {
       }
       board.push(row)
     }
-    setButtonStatus(board)
-  }
-
-  function clearAllButtons() {
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < columns; j++) {
-        changeButtonStatus(i, j)
-      }
-    }
+    setStartPosition([])
+    setButtonStatus([...board])
   }
 
   function start(row, col) {
@@ -166,11 +174,15 @@ function Board(props) {
     }
   }, [filledBoard])
 
+  useEffect(() => {
+    console.log(buttonStatus)
+  }, [buttonStatus])
+
   return (
     <div className="boardMainDiv">
       <div className="gameInfo">
         <FontAwesomeIcon icon={faBomb} /> : {mineQuantity} &nbsp;&nbsp;
-        <FontAwesomeIcon icon={faFlag} /> : {mineQuantity}
+        <FontAwesomeIcon icon={faFlag} /> : {mineQuantity - flaggedCells}
       </div>
       {filledBoard !== undefined && buttonStatus.length !== 0 ? (
         <div>
@@ -191,6 +203,7 @@ function Board(props) {
                           row={indexRow}
                           column={indexCol}
                           setHoveringCell={setHoveringCell}
+                          flagCell={flagCell}                           
                         />
                       )
                     })}

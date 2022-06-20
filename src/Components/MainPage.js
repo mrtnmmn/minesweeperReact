@@ -11,6 +11,12 @@ function MainPage() {
     const [rows, columns, setRows, setColumns, generate, filledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
     const [openedSettings, setOpenedSettings] = useState(false)
 
+    useEffect(() =>  {
+        document.addEventListener("contextmenu", (e) => {
+            e.preventDefault()
+        })
+    })
+
     return (  
         <div className="mainContainer">
             <NavBar 

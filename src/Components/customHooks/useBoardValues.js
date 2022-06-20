@@ -25,13 +25,10 @@ function useBoardValues() {
 
         let restrictedPositions = generateRestrictedPositions(row, col)
 
-        console.log('Restricted positions in generation: ' , restrictedPositions)
-
         for (let i = 0; i < mineQuantity; i++) {
             while (true) {
                 position = generateRandom(rows - 1 ,0) * 10 + generateRandom(columns - 1 ,0)
                 if (!minePositions.includes(position) && !restrictedPositions.includes(position)) {
-                    console.log()
                     minePositions.push(position)
                     break
                 }
@@ -43,8 +40,6 @@ function useBoardValues() {
     const generateRestrictedPositions = (row, col) => {
         let restrictedPositions = []
 
-        console.log('Start position: ' + row  + ', ' + col)
-
         restrictedPositions.push( (row - 1 ) * 10 + col - 1 )
         restrictedPositions.push( (row - 1 ) * 10 + col )
         restrictedPositions.push( (row - 1 ) * 10 + col + 1 )
@@ -54,8 +49,6 @@ function useBoardValues() {
         restrictedPositions.push( (row + 1 ) * 10 + col )
         restrictedPositions.push( (row + 1 ) * 10 + col + 1 )
         restrictedPositions.push( row * 10 + col )
-
-        console.log('Restricted positions: ', restrictedPositions)
 
         return restrictedPositions
 
