@@ -17,3 +17,15 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 600px) {
+    .boardDiv {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .boardDiv > .sideBarMainDiv {
+        align-self: center;
+    }
+}

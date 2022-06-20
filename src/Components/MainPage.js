@@ -2,7 +2,7 @@ import Board from "./Board";
 import '../Css/MainPage.css'
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useBoardValues from './customHooks/useBoardValues.js'
 import Sidebar from "./Sidebar";
 

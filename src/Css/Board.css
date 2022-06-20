@@ -5,3 +5,9 @@
     justify-content: center;
     align-items: center;
 }
+
+.gameInfo {
+    color: #00cfa3;
+    font-size: large;
+    margin-bottom: 4px;
+}  
