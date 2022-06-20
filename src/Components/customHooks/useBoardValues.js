@@ -119,7 +119,7 @@ function useBoardValues() {
     }, [startPosition])
     */
 
-    return [rows, columns, generate, boardValues, startPosition, setStartPosition, mineQuantity]
+    return [rows, columns, setRows, setColumns, generate, boardValues, startPosition, setStartPosition, mineQuantity]
 }
 
 export default useBoardValues;

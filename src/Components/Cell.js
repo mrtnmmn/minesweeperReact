@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBomb } from '@fortawesome/free-solid-svg-icons'
+
 import '../App.css';
 import { useState, useEffect } from 'react';
 
@@ -21,7 +24,7 @@ function Cell(props) {
     
     function changeChangeContent() {
         if (n === 9) {
-            setContent(<span>&#x1F4A3;</span>)   
+            setContent(<FontAwesomeIcon icon={faBomb}/>)   
         } else {
             setContent(n)
         }
@@ -51,6 +54,9 @@ function Cell(props) {
                 break;
             case 6:
                 setStateButton('buttonClicked six')
+                break;
+            case 9:
+                setStateButton('buttonClicked')
                 break;
             default:
                 setStateButton('buttonClicked zero')

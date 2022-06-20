@@ -1,13 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 
 import '../App.css';
+import '../Css/Board.css'
 import Cell from './Cell';
 
 import useBoardValues from './customHooks/useBoardValues.js'
 
-function Board() {
+function Board(props) {
 
-    const [rows, columns, generate, filledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
+    const rows = props.rows
+    const columns = props.columns
+    const generate = props.generate
+    const filledBoard = props.filledBoard
+    const startPosition = props.startPosition
+    const setStartPosition = props.setStartPosition
+    const mineQuantity = props.mineQuantity
+
     const [buttonStatus, setButtonStatus] = useState([])
     const [mock, setMock] = useState([])
     const [endGame, setEndGame] = useState(false)
@@ -141,9 +149,9 @@ function Board() {
     }, [filledBoard])
 
     return (
-    <div className="App">
-      <header className="App-header">
+    <div className="boardMainDiv">
         <div>Mines: {mineQuantity}</div>
+        <div>{rows}</div>
         {filledBoard !== undefined && buttonStatus.length !== 0 ?
             <div>
                 { firstClick ?
@@ -187,7 +195,6 @@ function Board() {
         : 
             <></>
         }
-      </header>
     </div>
     )
 }

@@ -5,10 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ComponentIni from './Components/ComponentIni';
 import Board from './Components/Board';
+import MainPage from './Components/MainPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Board />
+    <MainPage/>
   </React.StrictMode>,
   document.getElementById('root')
 );

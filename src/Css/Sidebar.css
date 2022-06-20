@@ -1,0 +1,29 @@
+.sideBarMainDiv {
+    justify-self: flex-end;
+    min-width: 20%;
+    min-height: 30vh;
+    align-self: flex-start;
+    font-size: medium;
+    color: rgb(121, 121, 121);
+}
+
+.formSidebar {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.labelSidebar {
+    margin: 1rem;
+}
+
+.inputSidebar {
+    background-color: transparent;
+    border: 0px;
+    padding: 0.5rem;
+    width: 3rem;
+    color: rgb(121, 121, 121);
+}

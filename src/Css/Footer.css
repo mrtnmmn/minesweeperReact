@@ -1,0 +1,10 @@
+.footerMainDiv {
+    min-width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: rgb(121, 121, 121);
+    font-size: small;
+}

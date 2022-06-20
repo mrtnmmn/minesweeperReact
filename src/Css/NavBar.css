@@ -1,0 +1,23 @@
+
+.navBarMainDiv {
+    min-width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 100%;
+}
+
+.gear {
+    margin-right: 2rem;
+    font-size: 2rem;
+}
+
+.gearColorUnactive {
+    color: rgb(121, 121, 121);
+}
+
+.gearColorActive {
+    color: #00cfa3;
+}
