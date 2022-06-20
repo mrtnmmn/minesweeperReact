@@ -21,6 +21,17 @@ function Cell(props) {
             changeChangeContent()
         }
     }, [status])
+
+    useEffect(() => {
+        document.addEventListener("contextmenu", handleRightClick)
+        return () => {
+            document.removeEventListener("contextmenu")
+        }
+    })
+
+    const handleRightClick = () => {
+        console.log(content)
+    }
     
     function changeChangeContent() {
         if (n === 9) {
