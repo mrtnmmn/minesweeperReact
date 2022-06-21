@@ -22,6 +22,7 @@ function Board(props) {
   const [hoveringCell, setHoveringCell] = useState([])
   const [auxHovering, setAuxHovering] = useState([])
   const [flaggedCells, setFlaggedCells] = useState(0)
+  const [victory, setVictory] = useState(false)
 
   useEffect(() => {
     resetAllButtons()
@@ -49,39 +50,6 @@ function Board(props) {
     document.addEventListener("contextmenu", prueba)
   })
 
-  /*
-  useEffect(() => {
-    console.log("Hovering Cell: ", hoveringCell)
-    if (hoveringCell.length === 0) {
-      console.log("deleting event listener")
-      document.removeEventListener("contextmenu", prueba)
-    } else {
-      document.addEventListener("contextmenu", prueba)
-    }
-  }, [hoveringCell])
-  */
-
-  /*
-    useEffect(() => {
-        console.log('Now hovering: ' , hoveringCell )
-        if (hoveringCell !== undefined && hoveringCell[0] !== undefined && hoveringCell[1] !== undefined){
-            setAuxHovering(hoveringCell)
-            console.log('added event listener in: ' , hoveringCell)
-            document.addEventListener("contextmenu", flagCell(hoveringCell[0], hoveringCell[1]))
-            document.addEventListener("contextmenu", (e) => {
-                e.preventDefault()
-                flagCell(hoveringCell[0], hoveringCell[1])
-            })
-        } else {
-            console.log('deleted event listener in: ', auxHovering)
-            if (auxHovering !== undefined && auxHovering[0] !== undefined && auxHovering[1] !== undefined) {
-                document.removeEventListener("contextmenu", flagCell(auxHovering[0], auxHovering[1]))
-            }
-        }
-
-    }, [hoveringCell])
-    */
-
   const handleRightClick = (e, row, col) => {
     e.preventDefault()
     console.log('rightClicking: ' + row  + ', ' + col)
@@ -91,16 +59,6 @@ function Board(props) {
   const prueba = () => {
     if (hoveringCell.length !== 0) console.log("Hovering Cell: ", hoveringCell)
   }
-
-  /*
-    const handleClick = (e) => {
-        if (e.type === "click") {
-            console.log("Left click");
-          } else if (e.type === "contextmenu") {
-            console.log("Right click");
-          }
-    }
-    */
 
   function revealCell(row, col) {
     if (row < 0 || row >= rows || col < 0 || col >= columns) {
@@ -175,7 +133,23 @@ function Board(props) {
   }, [filledBoard])
 
   useEffect(() => {
-    console.log(buttonStatus)
+    const total = rows * columns
+    let sum = 0
+
+    buttonStatus.forEach((row, indexRow) => {
+      row.forEach((col, indexCol) => {
+        if (col === 1) {
+          if (filledBoard[indexRow][indexCol] === 9) {
+            setEndGame(true)
+          }
+          sum += 1
+        }
+      })
+    });
+
+    if (sum + mineQuantity === total) {
+      setVictory(true)
+    }
   }, [buttonStatus])
 
   return (
@@ -203,13 +177,16 @@ function Board(props) {
                           row={indexRow}
                           column={indexCol}
                           setHoveringCell={setHoveringCell}
-                          flagCell={flagCell}                           
+                          flagCell={flagCell}     
+                          endGame={endGame}                      
                         />
                       )
                     })}
                   </div>
                 )
               })}
+              {victory ? <div>Victory</div> : <></>}
+              {endGame ? <div>Final</div> : <></>}
             </div>
           ) : (
             <div className="divCont">

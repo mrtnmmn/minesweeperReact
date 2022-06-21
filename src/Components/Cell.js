@@ -12,6 +12,7 @@ function Cell(props) {
   const column = props.column
   const setHoveringCell = props.setHoveringCell
   const flagCell = props.flagCell
+  const endGame = props.endGame
 
   const [stateButton, setStateButton] = useState("buttons unclicked")
   const [content, setContent] = useState("X")
@@ -33,6 +34,12 @@ function Cell(props) {
       setContent("X")
     }
   }, [status])
+
+  useEffect(() => {
+    if (endGame) {
+      setIsDisabled(true)
+    }
+  }, [endGame])
 
   function changeChangeContent() {
     if (n === 9) {
