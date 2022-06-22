@@ -1,16 +1,23 @@
 import { useState, useEffect, useCallback } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBomb, faFlag } from "@fortawesome/free-solid-svg-icons"
+import { faBomb, faFlag, faClock } from "@fortawesome/free-solid-svg-icons"
+import Swal from 'sweetalert2'
+//import 'sweetalert2/src/sweetalert2.scss'
 
 import "../App.css"
 import "../Css/Board.css"
 import Cell from "./Cell"
+import useStopwatch from "./customHooks/useStopwatch";
 
 function Board(props) {
+
+  const [timer, startTimer, pauseTimer, resetTimer] = useStopwatch()
+
   const rows = props.rows
   const columns = props.columns
   const generate = props.generate
   const filledBoard = props.filledBoard
+  const setFilledBoard = props.setFilledBoard
   const startPosition = props.startPosition
   const setStartPosition = props.setStartPosition
   const mineQuantity = props.mineQuantity
@@ -47,18 +54,34 @@ function Board(props) {
   }, [rows, columns])
 
   useEffect(() => {
-    document.addEventListener("contextmenu", prueba)
-  })
+    pauseTimer()
+    if (victory) {
+      setTimeout(function() { 
+        Swal.fire({
+          title: 'Victory!',
+          icon: 'success',
+          confirmButtonText: 'Reset',
+        })
+        .then(() => {
+          restart()
+        })
+    }.bind(this), 400)}
+  }, [victory])
 
-  const handleRightClick = (e, row, col) => {
-    e.preventDefault()
-    console.log('rightClicking: ' + row  + ', ' + col)
-    flagCell(row, col)
-  }
-
-  const prueba = () => {
-    if (hoveringCell.length !== 0) console.log("Hovering Cell: ", hoveringCell)
-  }
+  useEffect(() => {
+    pauseTimer()
+    if (endGame) {
+      setTimeout(function() { 
+        Swal.fire({
+          title: 'Mission Failed',
+          icon: 'error',
+          confirmButtonText: 'Reset',
+        })
+      .then(() => {
+        restart()
+      })
+    }.bind(this), 400)}
+  }, [endGame])
 
   function revealCell(row, col) {
     if (row < 0 || row >= rows || col < 0 || col >= columns) {
@@ -124,6 +147,19 @@ function Board(props) {
     setFirstClick(true)
     console.log("starting in: " + row + ", " + col)
     generate(row, col)
+    startTimer()
+  }
+
+  function restart() {
+    setVictory(false)
+    setEndGame(false)
+    setFlaggedCells(0)
+    setFirstClick(false)
+    setFilledBoard(undefined)
+    resetAllButtons()
+    setStartPosition([])
+    resetTimer()
+    generate()
   }
 
   useEffect(() => {
@@ -135,19 +171,21 @@ function Board(props) {
   useEffect(() => {
     const total = rows * columns
     let sum = 0
+    let bombClicked = false
 
     buttonStatus.forEach((row, indexRow) => {
       row.forEach((col, indexCol) => {
         if (col === 1) {
           if (filledBoard[indexRow][indexCol] === 9) {
             setEndGame(true)
+            bombClicked = true
           }
           sum += 1
         }
       })
     });
 
-    if (sum + mineQuantity === total) {
+    if (sum + mineQuantity === total && !bombClicked) {
       setVictory(true)
     }
   }, [buttonStatus])
@@ -156,7 +194,8 @@ function Board(props) {
     <div className="boardMainDiv">
       <div className="gameInfo">
         <FontAwesomeIcon icon={faBomb} /> : {mineQuantity} &nbsp;&nbsp;
-        <FontAwesomeIcon icon={faFlag} /> : {mineQuantity - flaggedCells}
+        <FontAwesomeIcon icon={faFlag} /> : {mineQuantity - flaggedCells} &nbsp;&nbsp;
+        <FontAwesomeIcon icon={faClock} /> : {timer.minutes}:{timer.seconds}
       </div>
       {filledBoard !== undefined && buttonStatus.length !== 0 ? (
         <div>
@@ -185,8 +224,6 @@ function Board(props) {
                   </div>
                 )
               })}
-              {victory ? <div>Victory</div> : <></>}
-              {endGame ? <div>Final</div> : <></>}
             </div>
           ) : (
             <div className="divCont">

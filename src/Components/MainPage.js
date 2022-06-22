@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar";
 
 function MainPage() {
 
-    const [rows, columns, setRows, setColumns, generate, filledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
+    const [rows, columns, setRows, setColumns, generate, filledBoard, setFilledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
     const [openedSettings, setOpenedSettings] = useState(false)
 
     useEffect(() =>  {
@@ -28,9 +28,11 @@ function MainPage() {
                     columns={columns}
                     generate={generate}
                     filledBoard={filledBoard}
+                    setFilledBoard={setFilledBoard}
                     startPosition={startPosition}
                     setStartPosition={setStartPosition}
-                    mineQuantity={mineQuantity}/>
+                    mineQuantity={mineQuantity}
+                    />
                 {openedSettings ?
                     <Sidebar
                         rows={rows}
