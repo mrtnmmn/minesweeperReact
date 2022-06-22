@@ -1,123 +1,123 @@
-import { useState, useEffect } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBomb, faLandMineOn } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBomb, faLandMineOn } from "@fortawesome/free-solid-svg-icons";
 
-import "../App.css"
-import '../Css/Cell.css'
-import useLongPress from "./customHooks/useLongPress"
+import "../App.css";
+import "../Css/Cell.css";
+import useLongPress from "./customHooks/useLongPress";
 
 function Cell(props) {
-  const n = props.num
-  const status = props.status
-  const row = props.row
-  const column = props.column
-  const setHoveringCell = props.setHoveringCell
-  const flagCell = props.flagCell
-  const endGame = props.endGame
+  const n = props.num;
+  const status = props.status;
+  const row = props.row;
+  const column = props.column;
+  const setHoveringCell = props.setHoveringCell;
+  const flagCell = props.flagCell;
+  const endGame = props.endGame;
 
-  const [stateButton, setStateButton] = useState("buttons unclicked")
-  const [content, setContent] = useState("X")
-  const [isDisabled, setIsDisabled] = useState(false)
-  const [buttonStatus, setButtonStatus] = useState(props.status)
-  const [hovering, setHovering] = useState(false)
+  const [stateButton, setStateButton] = useState("buttons unclicked");
+  const [content, setContent] = useState("X");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [buttonStatus, setButtonStatus] = useState(props.status);
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     if (status === 1) {
-      setColor()
-      setIsDisabled(true)
-      changeChangeContent()
+      setColor();
+      setIsDisabled(true);
+      changeChangeContent();
     } else if (status === 2) {
-      setStateButton("buttons unclicked flag")
-      setContent(<FontAwesomeIcon icon={faLandMineOn} />)
+      setStateButton("buttons unclicked flag");
+      setContent(<FontAwesomeIcon icon={faLandMineOn} />);
     } else if (status === 0) {
-      setStateButton("buttons unclicked one")
-      setIsDisabled(false)
-      setContent("X")
+      setStateButton("buttons unclicked one");
+      setIsDisabled(false);
+      setContent("X");
     }
-  }, [status])
+  }, [status]);
 
   useEffect(() => {
     if (endGame) {
-      setIsDisabled(true)
+      setIsDisabled(true);
     }
-  }, [endGame])
+  }, [endGame]);
 
   function changeChangeContent() {
     if (n === 9) {
-      setContent(<FontAwesomeIcon icon={faBomb} />)
+      setContent(<FontAwesomeIcon icon={faBomb} />);
     } else {
-      setContent(n)
+      setContent(n);
     }
   }
 
   function onClickFunction() {
-    setColor()
-    setIsDisabled(true)
+    setColor();
+    setIsDisabled(true);
   }
 
   function setColor() {
     switch (n) {
       case 1:
-        setStateButton("buttonClicked one")
-        break
+        setStateButton("buttonClicked one");
+        break;
       case 2:
-        setStateButton("buttonClicked two")
-        break
+        setStateButton("buttonClicked two");
+        break;
       case 3:
-        setStateButton("buttonClicked three")
-        break
+        setStateButton("buttonClicked three");
+        break;
       case 4:
-        setStateButton("buttonClicked four")
-        break
+        setStateButton("buttonClicked four");
+        break;
       case 5:
-        setStateButton("buttonClicked five")
-        break
+        setStateButton("buttonClicked five");
+        break;
       case 6:
-        setStateButton("buttonClicked six")
-        break
+        setStateButton("buttonClicked six");
+        break;
       case 9:
-        setStateButton("buttonClicked")
-        break
+        setStateButton("buttonClicked");
+        break;
       default:
-        setStateButton("buttonClicked zero")
-        break
+        setStateButton("buttonClicked zero");
+        break;
     }
   }
 
-
   const onLongPress = () => {
-      console.log('long pressed')
-    props.flagCell(row,column)
-};
+    console.log("long pressed");
+    props.flagCell(row, column);
+  };
 
-const onClick = () => {
-        props.buttonClick()
-}
+  const onClick = () => {
+    props.buttonClick();
+  };
 
-const defaultOptions = {
+  const defaultOptions = {
     shouldPreventDefault: true,
-    delay: 400,
-};
-const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
-
-
+    delay: 200,
+  };
+  const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
 
   return (
     <button
       disabled={isDisabled}
       onMouseEnter={() => {
-        setHoveringCell([row, column])
+        setHoveringCell([row, column]);
       }}
       onMouseLeave={() => {
-        setHoveringCell([])
+        setHoveringCell([]);
       }}
       className={stateButton}
-      onContextMenu={(e) => {e.preventDefault(); flagCell(row, column)}}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        flagCell(row, column);
+      }}
       {...longPressEvent}
     >
       {content}
     </button>
-  )
+  );
 }
 
-export default Cell
+export default Cell;
