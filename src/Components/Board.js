@@ -51,6 +51,7 @@ function Board(props) {
       mockedArr.push(row)
     }
     setMock([...mockedArr])
+    restart()
   }, [rows, columns])
 
   useEffect(() => {
@@ -107,7 +108,7 @@ function Board(props) {
 
   function changeButtonStatus(row, col) {
     let auxArray = buttonStatus
-    auxArray[row][col] = 1
+    if (buttonStatus[row][col] !== 2) auxArray[row][col] = 1
     setButtonStatus([...auxArray])
   }
 

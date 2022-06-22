@@ -4,6 +4,7 @@ import { faBomb, faLandMineOn } from "@fortawesome/free-solid-svg-icons"
 
 import "../App.css"
 import '../Css/Cell.css'
+import useLongPress from "./customHooks/useLongPress"
 
 function Cell(props) {
   const n = props.num
@@ -83,6 +84,24 @@ function Cell(props) {
     }
   }
 
+
+  const onLongPress = () => {
+      console.log('long pressed')
+    props.flagCell(row,column)
+};
+
+const onClick = () => {
+    console.log('click is triggered')
+}
+
+const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 400,
+};
+const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
+
+
+
   return (
     <button
       disabled={isDisabled}
@@ -97,6 +116,7 @@ function Cell(props) {
         props.buttonClick()
       }}
       onContextMenu={(e) => {e.preventDefault(); flagCell(row, column)}}
+      {...longPressEvent}
     >
       {content}
     </button>

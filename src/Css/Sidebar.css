@@ -27,3 +27,18 @@
     width: 3rem;
     color: rgb(121, 121, 121);
 }
+
+.arrowButtons {
+    color: #00cfa3;
+    margin-right: 3px;
+    background-color: transparent;
+    border: 1px solid #00cfa3;
+    border-radius: 3px;
+    font-weight: 1000;
+    transition: 300ms;
+}
+
+.arrowButtons:hover {
+    color: #ffffff;
+    background-color: #00cfa3;
+}

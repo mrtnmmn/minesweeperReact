@@ -9,8 +9,10 @@ function useBoardValues() {
     const [mineQuantity, setMineQuantity] = useState(0)
 
     useEffect(() => {
-        
-        setMineQuantity(Math.round(rows * columns / 6.25))
+
+        if (rows < 8 ) setRows(8)
+        if (columns < 8) setColumns(8)
+        if (rows >= 8 && columns >= 8) setMineQuantity(Math.round(rows * columns / 7.5))
 
     }, [rows, columns])
 

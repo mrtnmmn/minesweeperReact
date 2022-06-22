@@ -1,5 +1,6 @@
-import { useState } from "react";
 import '../Css/Sidebar.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons"
 
 function Sidebar(props) {
 
@@ -22,10 +23,22 @@ function Sidebar(props) {
         <div className="sideBarMainDiv">
             <form className="formSidebar" onSubmit={handleSubmit}>
                 <label className="labelSidebar">Rows:&nbsp;
-                    <input type="number" name="rows" value={rows} className="inputSidebar" onChange={handleChange} />
+                    <input type="text" name="rows" value={rows} className="inputSidebar" onChange={handleChange} />
+                    <button onClick={() => {setRows(rows+1)}} className='arrowButtons'>
+                        <FontAwesomeIcon icon={faArrowUp} />
+                    </button>
+                    <button onClick={() => {setRows(rows-1)}} className='arrowButtons'>
+                        <FontAwesomeIcon icon={faArrowDown} /> 
+                    </button>
                 </label>
                 <label className="labelSidebar">Columns:&nbsp;
-                    <input type="number" name="columns" value={columns} className="inputSidebar" onChange={handleChange} />
+                    <input type="text" name="columns" value={columns} className="inputSidebar" onChange={handleChange} />
+                    <button onClick={() => {setColumns(columns+1)}} className='arrowButtons'>
+                        <FontAwesomeIcon icon={faArrowUp} /> 
+                    </button>
+                    <button onClick={() => {setColumns(columns - 1)}} className='arrowButtons'>
+                        <FontAwesomeIcon icon={faArrowDown} /> 
+                    </button>
                 </label>
             </form>
         </div>
