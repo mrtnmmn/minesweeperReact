@@ -8,3 +8,12 @@
     color: rgb(121, 121, 121);
     font-size: small;
 }
+
+.links {
+    text-decoration: none;
+    color: rgb(121, 121, 121);
+}
+
+.links:visited {
+    color: rgb(121, 121, 121);
+}

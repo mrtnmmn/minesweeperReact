@@ -91,7 +91,7 @@ function Cell(props) {
 };
 
 const onClick = () => {
-    console.log('click is triggered')
+        props.buttonClick()
 }
 
 const defaultOptions = {
@@ -112,9 +112,6 @@ const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
         setHoveringCell([])
       }}
       className={stateButton}
-      onClick={() => {
-        props.buttonClick()
-      }}
       onContextMenu={(e) => {e.preventDefault(); flagCell(row, column)}}
       {...longPressEvent}
     >
