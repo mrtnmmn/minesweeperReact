@@ -5,10 +5,12 @@ import Footer from "./Footer";
 import { useState, useEffect } from "react";
 import useBoardValues from './customHooks/useBoardValues.js'
 import Sidebar from "./Sidebar";
+import useNightMode from "./customHooks/useNightMode";
 
 function MainPage() {
 
     const [rows, columns, setRows, setColumns, generate, filledBoard, setFilledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
+    const [nightMode, changeNightMode, backGroundColor] = useNightMode()
     const [openedSettings, setOpenedSettings] = useState(false)
 
     useEffect(() =>  {
@@ -18,7 +20,7 @@ function MainPage() {
     })
 
     return (  
-        <div className="mainContainer">
+        <div className={backGroundColor}>
             <NavBar 
                 openedSettings={openedSettings} 
                 setOpenedSettings={setOpenedSettings} />
@@ -38,7 +40,10 @@ function MainPage() {
                         rows={rows}
                         columns={columns}
                         setRows={setRows}
-                        setColumns={setColumns}/>
+                        setColumns={setColumns}
+                        nightMode={nightMode}
+                        changeNightMode={changeNightMode}
+                    />
                 :<></>}
             </div>
             <Footer/>

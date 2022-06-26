@@ -2,15 +2,47 @@ import "../Css/Sidebar.css";
 import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Slider from '@mui/material/Slider';
+import Checkbox from '@mui/material/Checkbox';
 import { styled } from "@mui/material/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 
 function Sidebar(props) {
   const rows = props.rows;
   const columns = props.columns;
   const setRows = props.setRows;
   const setColumns = props.setColumns;
+  const nightMode = props.nightMode
+  const changeNightMode = props.changeNightMode
+
+  const [gameDifficulty, setGameDifficulty] = useState(0)
+  const [checked, setChecked] = useState([true, false, false, false])
+
+  useEffect(() => {
+    switch (gameDifficulty){
+      case '0': 
+        setRows(8)
+        setColumns(8)
+        break
+      case '1': 
+        setRows(14)
+        setColumns(18)
+        break
+      case '2':
+        setRows(20)
+        setColumns(24) 
+        break 
+      case '3':
+        break
+    }
+  }, [gameDifficulty])
+
+  useEffect(() => {
+    console.log(nightMode)
+  }, [nightMode])
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -36,7 +68,7 @@ function Sidebar(props) {
       },
     },
     "& .MuiSwitch-thumb": {
-      backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#001e3c",
+      backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#00cfa3",
       width: 32,
       height: 32,
       "&:before": {
@@ -62,21 +94,92 @@ function Sidebar(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "rows") if (value >= 8) setRows(value);
-    if (name === "columns") if (value >= 8) setColumns(value);
+    console.log(name + ', ' + value)
+    if (name === "rows") if (value >= 8) setRows(value)
+    if (name === "columns") if (value >= 8) setColumns(value)
+    if (name === "difficulty") {
+      setGameDifficulty(value)
+      changeCheckedButtonsStatus(value)
+    }
+    if (name === "nightModeSwitch") changeNightMode()
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   };
 
+  const changeCheckedButtonsStatus = (value) => {
+    let mockedCheckedArray = []
+
+    for (let i = 0; i < checked.length; i++) {
+      console.log('Value:' + value + ', I:' + i)
+      if (parseInt(value) === parseInt(i)) {
+        console.log('same')
+        mockedCheckedArray.push(true)
+      }
+      else {
+        mockedCheckedArray.push(false)
+      }
+    }
+    console.log(mockedCheckedArray)
+    setChecked([...mockedCheckedArray])
+  }
+
+  const manualSizeChange = () => {
+    setGameDifficulty(3)
+    changeCheckedButtonsStatus(3)      
+  }
+
   return (
     <div className="sideBarMainDiv">
+      <div className="divDifficultyButtons">
+        <label>
+          <Checkbox
+            checked={checked[0]}
+            onChange={handleChange}
+            name="difficulty"
+            value={0}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          Easy
+        </label>
+        <label>
+          <Checkbox
+            checked={checked[1]}
+            onChange={handleChange}
+            name="difficulty"
+            value={1}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          Medium
+        </label>
+        <label>
+          <Checkbox
+            checked={checked[2]}
+            onChange={handleChange}
+            name="difficulty"
+            value={2}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          Difficult
+        </label>
+        <label>
+          <Checkbox
+            checked={checked[3]}
+            onChange={handleChange}
+            name="difficulty"
+            value={3}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          Personalized
+        </label>
+      </div>
       <form className="formSidebar" onSubmit={handleSubmit}>
         <div>
           <button
             onClick={() => {
               setRows(rows + 1);
+              manualSizeChange()
             }}
             className="arrowButtons"
           >
@@ -85,6 +188,7 @@ function Sidebar(props) {
           <button
             onClick={() => {
               setRows(rows - 1);
+              manualSizeChange()
             }}
             className="arrowButtons"
           >
@@ -106,6 +210,7 @@ function Sidebar(props) {
           <button
             onClick={() => {
               setColumns(columns + 1);
+              manualSizeChange()
             }}
             className="arrowButtons"
           >
@@ -114,6 +219,7 @@ function Sidebar(props) {
           <button
             onClick={() => {
               setColumns(columns - 1);
+              manualSizeChange()
             }}
             className="arrowButtons"
           >
@@ -126,6 +232,7 @@ function Sidebar(props) {
               value={columns}
               className="inputSidebar"
               onChange={handleChange}
+              label="Easy"
             />
             Columns:&nbsp;
           </label>
@@ -135,7 +242,14 @@ function Sidebar(props) {
 
       <FormGroup>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+          control={
+            <MaterialUISwitch 
+              sx={{ m: 1 }} 
+              checked={nightMode}
+              onChange={handleChange}
+              name="nightModeSwitch"
+            />
+          }
           label="Night mode"
         />
       </FormGroup>

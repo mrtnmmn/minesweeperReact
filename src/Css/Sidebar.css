@@ -42,3 +42,13 @@
     color: #ffffff;
     background-color: #00cfa3;
 }
+
+.divDifficultyButtons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.radioButtonDifficulty {
+    background-color: #00cfa3;
+}

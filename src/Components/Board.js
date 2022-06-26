@@ -163,6 +163,26 @@ function Board(props) {
     generate()
   }
 
+  function revealAll() {
+    let mockedArr = []
+    let row = []
+
+    for (let i = 0; i < rows; i++) {
+      row = []
+      for (let j = 0; j < columns; j++) {
+        if (filledBoard[i][j] !== 9) {
+          row.push(1)
+        } else {
+          row.push(0)
+        }
+      }
+      mockedArr.push(row)
+    }
+
+    mockedArr[0][0] = 0
+    setButtonStatus([...mockedArr])
+  }
+
   useEffect(() => {
     if (firstClick) {
       revealCell(startPosition[0], startPosition[1])
