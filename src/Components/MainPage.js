@@ -10,7 +10,7 @@ import useNightMode from "./customHooks/useNightMode";
 function MainPage() {
 
     const [rows, columns, setRows, setColumns, generate, filledBoard, setFilledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
-    const [nightMode, changeNightMode, backGroundColor, cellColors] = useNightMode()
+    const [nightMode, changeNightMode, backGroundColor, cellColors, gearColor] = useNightMode()
     const [openedSettings, setOpenedSettings] = useState(false)
 
     useEffect(() =>  {
@@ -23,7 +23,8 @@ function MainPage() {
         <div className={backGroundColor}>
             <NavBar 
                 openedSettings={openedSettings} 
-                setOpenedSettings={setOpenedSettings} />
+                setOpenedSettings={setOpenedSettings}
+                gearColor={gearColor} />
             <div className="boardDiv">
                 <Board
                     rows={rows}

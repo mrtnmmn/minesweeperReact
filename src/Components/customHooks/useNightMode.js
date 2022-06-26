@@ -20,6 +20,7 @@ function useNightMode() {
             bomb: 'bomb'
         }
     )
+    const [gearColor, setGearColor] = useState('gearColorActive')
 
     const changeNightMode = () => {
         setNightMode(!nightMode)
@@ -44,6 +45,7 @@ function useNightMode() {
                     bomb: 'bomb'
                 }
             )
+            setGearColor('gearColorActive')
         } else {
             setBackGroundColor('mainContainer backgroundDay')
             setCellColors(
@@ -62,10 +64,11 @@ function useNightMode() {
                     bomb: 'bombLight'
                 }
             )
+            setGearColor('gearColorActiveLight')
         }
     }, [nightMode])
 
-    return [nightMode, changeNightMode, backGroundColor, cellColors]
+    return [nightMode, changeNightMode, backGroundColor, cellColors, gearColor]
 }
 
 export default useNightMode

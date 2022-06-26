@@ -23,11 +23,6 @@ function Cell(props) {
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
-    console.log(cellColors)
-    console.log(cellColors.buttons)
-  }, [cellColors])
-
-  useEffect(() => {
     if (status === 1) {
       setColor();
       setIsDisabled(true);
@@ -91,7 +86,6 @@ function Cell(props) {
   }
 
   const onLongPress = () => {
-    console.log("long pressed");
     props.flagCell(row, column);
   };
 
