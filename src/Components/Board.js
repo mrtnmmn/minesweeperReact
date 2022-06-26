@@ -21,6 +21,7 @@ function Board(props) {
   const startPosition = props.startPosition
   const setStartPosition = props.setStartPosition
   const mineQuantity = props.mineQuantity
+  const cellColors = props.cellColors
 
   const [buttonStatus, setButtonStatus] = useState([])
   const [mock, setMock] = useState([])
@@ -238,7 +239,8 @@ function Board(props) {
                           column={indexCol}
                           setHoveringCell={setHoveringCell}
                           flagCell={flagCell}     
-                          endGame={endGame}                      
+                          endGame={endGame}     
+                          cellColors={cellColors}                 
                         />
                       )
                     })}
@@ -263,6 +265,7 @@ function Board(props) {
                           row={indexRow}
                           column={indexCol}
                           setHoveringCell={setHoveringCell}
+                          cellColors={cellColors}                 
                         />
                       )
                     })}

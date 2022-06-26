@@ -10,7 +10,7 @@ import useNightMode from "./customHooks/useNightMode";
 function MainPage() {
 
     const [rows, columns, setRows, setColumns, generate, filledBoard, setFilledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
-    const [nightMode, changeNightMode, backGroundColor] = useNightMode()
+    const [nightMode, changeNightMode, backGroundColor, cellColors] = useNightMode()
     const [openedSettings, setOpenedSettings] = useState(false)
 
     useEffect(() =>  {
@@ -34,6 +34,7 @@ function MainPage() {
                     startPosition={startPosition}
                     setStartPosition={setStartPosition}
                     mineQuantity={mineQuantity}
+                    cellColors={cellColors}
                     />
                 {openedSettings ?
                     <Sidebar

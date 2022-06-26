@@ -1,3 +1,125 @@
 .flag {
     color: #555555;
 }
+
+.flagLight {
+    color: #ffffff;
+    border: 1px solid #acacac;
+}
+
+.unclicked {
+    color: #00cfa3;
+    border: 1px solid #00cfa3;
+}
+
+.unclickedLight {
+    color: #acacac;
+    border: 1px solid #acacac;
+}
+
+.buttons {
+    height: 2rem;
+    width: 2rem;
+    margin: 2px;
+    border-color: #00cfa3;
+    background-color: #00cfa3;
+    border-radius: 10%;
+    font-weight: bolder;
+    transition: 100ms;
+}
+
+.buttonsLight {
+    background-color: #acacac;
+    border-color: #acacac;
+}
+  
+.buttonClicked {
+    height: 2rem;
+    width: 2rem;
+    margin: 2px;
+    background-color: white;
+    border-color: white;
+    border-radius: 10%;
+    font-weight: bolder;
+}
+
+.one {
+    color: #00cfa3;
+}
+
+.oneLight {
+    color: #ffffff;
+    background-color: #ffe56e;
+    border: 1px solid #ffe56e;
+}
+  
+.two {
+    color: #0059ff;
+}
+  
+.twoLight {
+    color: #ffffff;
+    background-color: #FFC300;
+    border: 1px solid #FFC300;
+}
+
+.three {
+    color: #ec00ff;
+}
+
+.threeLight {
+    color: #ffffff;
+    background-color: #FF5733;
+    border: 1px solid #FF5733;
+}
+  
+.four {
+    color: #a250ff;
+}
+
+.fourLight {
+    color: #ffffff;
+    background-color: #C70039;
+    border: 1px solid #C70039;
+}
+  
+.five {
+    color: #ff9b00
+}
+
+.fiveLight {
+    color: #ffffff;
+    background-color: #900C3F;
+    border: 1px solid #900C3F;
+}
+  
+.six {
+    color:#ff1f00;
+}
+
+.sixLight {
+    color: #581845;
+    background-color: #581845;
+    border: 1px solid #581845;
+}
+  
+.zero {
+    color: #ffffff;
+    background-color: #ffffff;
+}
+
+.zeroLight {
+    color: #daf7a6;
+    background-color: #daf7a6;
+    border: 1px solid #daf7a6;
+}
+
+.bomb {
+    background-color: #ffffff;
+}
+
+.bombLight {
+    background-color: #581845;
+    border: 1px solid #581845;
+    color: #ffffff;
+}

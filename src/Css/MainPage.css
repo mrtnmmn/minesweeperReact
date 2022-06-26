@@ -8,10 +8,6 @@
     font-size: calc(10px + 2vmin);
 }
 
-.backgroundNight {
-    background-color: #282c34;
-}
-
 .backgroundDay {
     background-color: #ffffff;
 }

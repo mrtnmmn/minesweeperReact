@@ -14,6 +14,7 @@ function Cell(props) {
   const setHoveringCell = props.setHoveringCell;
   const flagCell = props.flagCell;
   const endGame = props.endGame;
+  const cellColors = props.cellColors
 
   const [stateButton, setStateButton] = useState("buttons unclicked");
   const [content, setContent] = useState("X");
@@ -22,15 +23,20 @@ function Cell(props) {
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
+    console.log(cellColors)
+    console.log(cellColors.buttons)
+  }, [cellColors])
+
+  useEffect(() => {
     if (status === 1) {
       setColor();
       setIsDisabled(true);
       changeChangeContent();
     } else if (status === 2) {
-      setStateButton("buttons unclicked flag");
+      setStateButton(cellColors.buttons  + " " + cellColors.flag);
       setContent(<FontAwesomeIcon icon={faLandMineOn} />);
     } else if (status === 0) {
-      setStateButton("buttons unclicked one");
+      setStateButton(cellColors.buttons + " " + cellColors.unclicked);
       setIsDisabled(false);
       setContent("X");
     }
@@ -58,28 +64,28 @@ function Cell(props) {
   function setColor() {
     switch (n) {
       case 1:
-        setStateButton("buttonClicked one");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.one);
         break;
       case 2:
-        setStateButton("buttonClicked two");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.two);
         break;
       case 3:
-        setStateButton("buttonClicked three");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.three);
         break;
       case 4:
-        setStateButton("buttonClicked four");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.four);
         break;
       case 5:
-        setStateButton("buttonClicked five");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.five);
         break;
       case 6:
-        setStateButton("buttonClicked six");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.six);
         break;
       case 9:
-        setStateButton("buttonClicked");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.bomb);
         break;
       default:
-        setStateButton("buttonClicked zero");
+        setStateButton(cellColors.buttonClicked + " " + cellColors.zero);
         break;
     }
   }
