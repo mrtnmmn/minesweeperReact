@@ -22,6 +22,7 @@ function Board(props) {
   const setStartPosition = props.setStartPosition
   const mineQuantity = props.mineQuantity
   const cellColors = props.cellColors
+  const lightMode = props.lightMode
 
   const [buttonStatus, setButtonStatus] = useState([])
   const [mock, setMock] = useState([])
@@ -214,6 +215,7 @@ function Board(props) {
 
   return (
     <div className="boardMainDiv">
+      <button onClick={() => {console.log(lightMode)}}>Click</button>
       <div className="gameInfo">
         <FontAwesomeIcon icon={faBomb} /> : {mineQuantity} &nbsp;&nbsp;
         <FontAwesomeIcon icon={faFlag} /> : {mineQuantity - flaggedCells} &nbsp;&nbsp;
@@ -240,7 +242,8 @@ function Board(props) {
                           setHoveringCell={setHoveringCell}
                           flagCell={flagCell}     
                           endGame={endGame}     
-                          cellColors={cellColors}                 
+                          cellColors={cellColors}          
+                          lightMode={lightMode}       
                         />
                       )
                     })}
@@ -265,7 +268,8 @@ function Board(props) {
                           row={indexRow}
                           column={indexCol}
                           setHoveringCell={setHoveringCell}
-                          cellColors={cellColors}                 
+                          cellColors={cellColors}       
+                          lightMode={lightMode}          
                         />
                       )
                     })}

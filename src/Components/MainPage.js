@@ -6,12 +6,14 @@ import { useState, useEffect } from "react";
 import useBoardValues from './customHooks/useBoardValues.js'
 import Sidebar from "./Sidebar";
 import useNightMode from "./customHooks/useNightMode";
+import { light } from "@mui/material/styles/createPalette";
 
 function MainPage() {
 
     const [rows, columns, setRows, setColumns, generate, filledBoard, setFilledBoard, startPosition, setStartPosition, mineQuantity] = useBoardValues()
     const [nightMode, changeNightMode, backGroundColor, cellColors, gearColor] = useNightMode()
     const [openedSettings, setOpenedSettings] = useState(false)
+    const [lightMode, setLightMode] = useState(0)
 
     useEffect(() =>  {
         document.addEventListener("contextmenu", (e) => {
@@ -36,6 +38,7 @@ function MainPage() {
                     setStartPosition={setStartPosition}
                     mineQuantity={mineQuantity}
                     cellColors={cellColors}
+                    lightMode={lightMode}
                     />
                 {openedSettings ?
                     <Sidebar
@@ -43,8 +46,8 @@ function MainPage() {
                         columns={columns}
                         setRows={setRows}
                         setColumns={setColumns}
-                        nightMode={nightMode}
-                        changeNightMode={changeNightMode}
+                        lightMode={lightMode}
+                        setLightMode={setLightMode}
                     />
                 :<></>}
             </div>

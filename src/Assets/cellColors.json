@@ -1,0 +1,31 @@
+{
+    "dark": {
+        "flag": "flag",
+        "unclicked": "unclicked",
+        "buttons": "buttons",
+        "one": "one",
+        "two": "two",
+        "three": "three",
+        "four": "four", 
+        "five": "five", 
+        "six": "six", 
+        "zero": "zero",
+        "bomb": "bomb",
+        "buttonClicked": "buttonClicked"
+    },
+    "light": {
+        "flag": "flagLight",
+        "unclicked": "unclickedLight",
+        "buttons": "buttonsLight",
+        "one": "oneLight",
+        "two": "twoLight",
+        "three": "threeLight",
+        "four": "fourLight", 
+        "five": "fiveLight", 
+        "six": "sixLight", 
+        "zero": "zeroLight",
+        "bomb": "bombLight",
+        "buttonClicked": "buttonClicked"
+    }
+}
+

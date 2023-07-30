@@ -5,6 +5,7 @@ import { faBomb, faLandMineOn } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
 import "../Css/Cell.css";
 import useLongPress from "./customHooks/useLongPress";
+import cellColors from "../Assets/cellColors.json"
 
 function Cell(props) {
   const n = props.num;
@@ -13,14 +14,15 @@ function Cell(props) {
   const column = props.column;
   const setHoveringCell = props.setHoveringCell;
   const flagCell = props.flagCell;
-  const endGame = props.endGame;
-  const cellColors = props.cellColors
+  const endGame = props.endGame
+  const lightMode = props.lightMode
 
-  const [stateButton, setStateButton] = useState("buttons unclicked");
+  const [stateButton, setStateButton] = useState();
   const [content, setContent] = useState("X");
   const [isDisabled, setIsDisabled] = useState(false);
   const [buttonStatus, setButtonStatus] = useState(props.status);
   const [hovering, setHovering] = useState(false);
+  const [lightColors, setLightColors] = useState((lightMode) => lightMode === 0 ? cellColors.dark : cellColors.light);
 
   useEffect(() => {
     if (status === 1) {
@@ -28,10 +30,10 @@ function Cell(props) {
       setIsDisabled(true);
       changeChangeContent();
     } else if (status === 2) {
-      setStateButton(cellColors.buttons  + " " + cellColors.flag);
+      setStateButton(lightColors.buttons  + " " + lightColors.flag);
       setContent(<FontAwesomeIcon icon={faLandMineOn} />);
     } else if (status === 0) {
-      setStateButton(cellColors.buttons + " " + cellColors.unclicked);
+      setStateButton(lightColors.buttons + " " + lightColors.unclicked);
       setIsDisabled(false);
       setContent("X");
     }
@@ -42,6 +44,15 @@ function Cell(props) {
       setIsDisabled(true);
     }
   }, [endGame]);
+
+  useEffect(() => {
+    if (lightMode === 0) {
+      setLightColors(cellColors.dark)
+    } else {
+      setLightColors(cellColors.light)
+    }
+    console.log(row + ', ' + column + ': ' , lightColors) 
+  }, [lightMode])
 
   function changeChangeContent() {
     if (n === 9) {
@@ -59,28 +70,28 @@ function Cell(props) {
   function setColor() {
     switch (n) {
       case 1:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.one);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.one);
         break;
       case 2:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.two);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.two);
         break;
       case 3:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.three);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.three);
         break;
       case 4:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.four);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.four);
         break;
       case 5:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.five);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.five);
         break;
       case 6:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.six);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.six);
         break;
       case 9:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.bomb);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.bomb);
         break;
       default:
-        setStateButton(cellColors.buttonClicked + " " + cellColors.zero);
+        setStateButton(lightColors.buttonClicked + " " + lightColors.zero);
         break;
     }
   }

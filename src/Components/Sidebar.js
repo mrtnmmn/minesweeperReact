@@ -15,8 +15,8 @@ function Sidebar(props) {
   const columns = props.columns;
   const setRows = props.setRows;
   const setColumns = props.setColumns;
-  const nightMode = props.nightMode
-  const changeNightMode = props.changeNightMode
+  const lightMode = props.lightMode
+  const setLightMode = props.setLightMode
 
   const [gameDifficulty, setGameDifficulty] = useState(0)
   const [checked, setChecked] = useState([true, false, false, false])
@@ -41,8 +41,8 @@ function Sidebar(props) {
   }, [gameDifficulty])
 
   useEffect(() => {
-    console.log(nightMode)
-  }, [nightMode])
+    console.log('LightMode: ' + lightMode)
+  }, [lightMode])
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -94,14 +94,21 @@ function Sidebar(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name + ', ' + value)
     if (name === "rows") if (value >= 8) setRows(value)
     if (name === "columns") if (value >= 8) setColumns(value)
     if (name === "difficulty") {
       setGameDifficulty(value)
       changeCheckedButtonsStatus(value)
     }
-    if (name === "nightModeSwitch") changeNightMode()
+    if (name === "nightModeSwitch") { 
+      console.log('switch controller'); 
+      if (lightMode === 0) {
+        console.log('Dark to light'); 
+        setLightMode(1)
+      } else {
+        setLightMode(0)
+      }
+    } 
   };
 
   const handleSubmit = async (e) => {
@@ -245,7 +252,7 @@ function Sidebar(props) {
           control={
             <MaterialUISwitch 
               sx={{ m: 1 }} 
-              checked={nightMode}
+              checked={lightMode}
               onChange={handleChange}
               name="nightModeSwitch"
             />

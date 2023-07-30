@@ -29,8 +29,14 @@
 }
 
 .buttonsLight {
+    height: 2rem;
+    width: 2rem;
+    margin: 2px;
     background-color: #acacac;
     border-color: #acacac;
+    border-radius: 10%;
+    font-weight: bolder;
+    transition: 100ms;
 }
   
 .buttonClicked {
